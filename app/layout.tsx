@@ -1,9 +1,10 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Providers } from "@/components/providers"
 
+/* ✅ Metadata (NO themeColor here) */
 export const metadata: Metadata = {
   title: {
     default: "SPACEZ – Exclusive Bookings & Offers",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
   applicationName: "SPACEZ",
 
-  metadataBase: new URL("https://spacez.vercel.app"),
+  metadataBase: new URL("https://spacez-ui.vercel.app"),
 
   icons: {
     icon: "/logo.jpg",
@@ -45,7 +46,10 @@ export const metadata: Metadata = {
       "Book premium stays and unlock exclusive rewards with SPACEZ.",
     images: ["/logo.jpg"],
   },
+}
 
+/* ✅ Viewport export (THIS fixes the warnings) */
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
