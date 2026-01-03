@@ -1,46 +1,47 @@
 "use client"
 
-import { Star, Heart, MapPin } from "lucide-react"
-import { useState } from "react"
+import { Star, MapPin } from "lucide-react"
 
-interface PropertyCardProps {
-  property: {
-    id: number
-    name: string
-    location: string
-    price: number
-    rating: number
-    image: string
-  }
+interface Property {
+  id: number
+  name: string
+  location: string
+  price: number
+  rating: number
+  image: string
 }
 
-export function PropertyCard({ property }: PropertyCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false)
-
+export function PropertyCard({ property }: { property: Property }) {
   return (
-    <div className="spacez-card overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
-      <div className="relative w-full h-32 bg-muted rounded-lg overflow-hidden mb-2">
-        <img src={property.image || "/placeholder.svg"} alt={property.name} className="w-full h-full object-cover" />
-        <button
-          onClick={() => setIsWishlisted(!isWishlisted)}
-          className="absolute top-2 right-2 bg-background rounded-full p-1.5 shadow"
-        >
-          <Heart className={`w-4 h-4 ${isWishlisted ? "fill-accent text-accent" : "text-muted-foreground"}`} />
-        </button>
+    <div className="bg-card rounded-xl overflow-hidden border border-border">
+      <div className="relative w-full aspect-[4/3]">
+        <img
+          src={property.image}
+          alt={property.name}
+          className="h-full w-full object-cover"
+        />
       </div>
 
-      <h3 className="font-semibold text-sm line-clamp-1">{property.name}</h3>
-      <div className="flex items-center gap-1 text-muted-foreground text-xs mt-1">
-        <MapPin className="w-3 h-3" />
-        <span className="line-clamp-1">{property.location}</span>
-      </div>
+      <div className="p-3 space-y-1">
+        <h3 className="text-sm font-semibold leading-tight">
+          {property.name}
+        </h3>
 
-      <div className="flex items-center justify-between mt-2">
-        <div className="flex items-center gap-1">
-          <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-          <span className="text-xs font-medium">{property.rating}</span>
+        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+          <MapPin className="w-3 h-3" />
+          {property.location}
         </div>
-        <span className="text-sm font-bold text-primary">₹{property.price}/night</span>
+
+        <div className="flex items-center justify-between pt-1">
+          <div className="flex items-center gap-1 text-sm font-medium">
+            <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+            {property.rating}
+          </div>
+
+          <span className="text-sm font-semibold text-primary">
+            ₹{property.price.toLocaleString()}/night
+          </span>
+        </div>
       </div>
     </div>
   )

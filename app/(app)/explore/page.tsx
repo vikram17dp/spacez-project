@@ -42,7 +42,6 @@ const properties = [
 export default function ExplorePage() {
   const [search, setSearch] = useState("")
 
-  // ✅ SEARCH FILTER (logic only, no UI change)
   const filteredProperties = properties.filter((property) =>
     `${property.name} ${property.location}`
       .toLowerCase()
@@ -50,7 +49,7 @@ export default function ExplorePage() {
   )
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 pb-20 space-y-4">
       <h1 className="text-2xl font-bold">Explore</h1>
 
       <div className="relative">
