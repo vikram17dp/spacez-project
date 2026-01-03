@@ -63,11 +63,21 @@ export default function ExplorePage() {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        {filteredProperties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
-        ))}
-      </div>
+      {filteredProperties.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <Search className="w-10 h-10 text-muted-foreground mb-2" />
+          <p className="text-sm font-medium">No properties found</p>
+          <p className="text-xs text-muted-foreground">
+            Try searching with a different city or location
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          {filteredProperties.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
