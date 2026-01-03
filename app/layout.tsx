@@ -1,44 +1,65 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Providers } from "@/components/providers"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
-
 export const metadata: Metadata = {
-  title: "SPACEZ - Exclusive Bookings & Offers",
-  description: "Book directly with us to get exclusive benefits and rewards",
-  generator: "v0.app",
+  title: {
+    default: "SPACEZ – Exclusive Bookings & Offers",
+    template: "%s | SPACEZ",
+  },
+  description:
+    "Discover premium stays, exclusive coupons, gift cards, and payment offers. Book directly with SPACEZ and save more.",
+
+  applicationName: "SPACEZ",
+
+  metadataBase: new URL("https://spacez.vercel.app"),
+
   icons: {
-    icon: [
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
+
+  openGraph: {
+    title: "SPACEZ – Exclusive Bookings & Offers",
+    description:
+      "Premium stays with exclusive coupons, gift cards, and rewards.",
+    siteName: "SPACEZ",
+    images: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        url: "/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SPACEZ",
       },
     ],
-    apple: "/apple-icon.png",
+    type: "website",
+    locale: "en_IN",
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "SPACEZ – Exclusive Bookings & Offers",
+    description:
+      "Book premium stays and unlock exclusive rewards with SPACEZ.",
+    images: ["/logo.jpg"],
+  },
+
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <Providers>{children}</Providers>
         <Analytics />
       </body>
